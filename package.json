@@ -1,6 +1,6 @@
 {
   "name": "better-xml-formatter",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "repository": "https://github.com/caiodanielnunessantos/better-xml-formatter",
   "bugs": {
     "email": "caio.daniel.nunes.santos@gmail.com",
@@ -9,6 +9,7 @@
   "homepage": "https://github.com/caiodanielnunessantos/better-xml-formatter#readme",
   "description": "Converts a XML string into a human readable format (pretty print), taking into account the maximum line width and the number of spaces used to ident each level",
   "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
   "scripts": {
     "lint": "eslint . --ext=ts",
     "compile": "tsc",
