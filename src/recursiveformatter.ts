@@ -11,7 +11,7 @@ export function formatter(element: XMLJSElement | XMLJSElement[], indentation: s
 
 function formatParentElement(element: XMLJSElement, indentation: string, maxLineWidth: number): string {
   return `${formatOpeningTagElementAll(element, indentation, maxLineWidth)}
-${indentOneLevel(formatter(element.children || {}, indentation, maxLineWidth), indentation.length)}
+${indentOneLevel(formatter(element.children || {}, indentation, maxLineWidth - indentation.length), indentation.length)}
 ${formatClosingTagElement(element)}
 `;
 }
