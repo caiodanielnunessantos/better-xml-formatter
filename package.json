@@ -1,0 +1,35 @@
+{
+  "name": "better-xml-formatter",
+  "version": "1.0.0",
+  "repository": "https://github.com/caiodanielnunessantos/better-xml-formatter",
+  "bugs": {
+    "email": "caio.daniel.nunes.santos@gmail.com",
+    "url": "https://github.com/caiodanielnunessantos/better-xml-formatter/issues"
+  },
+  "homepage": "https://github.com/caiodanielnunessantos/better-xml-formatter#readme",
+  "description": "Converts a XML string into a human readable format (pretty print), taking into account the maximum line width and the number of spaces used to ident each level",
+  "main": "dist/src/index.js",
+  "scripts": {
+    "lint": "eslint . --ext=ts",
+    "compile": "tsc",
+    "pretest": "npm run compile",
+    "test": "node ./dist/tests/index.js"
+  },
+  "keywords": [
+    "xml",
+    "formatter"
+  ],
+  "author": "Caio Daniel Nunes Santos <caio.daniel.nunes.santos@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/lodash": "^4.14.191",
+    "@types/node": "^18.13.0",
+    "@typescript-eslint/eslint-plugin": "^5.51.0",
+    "eslint": "^8.34.0",
+    "typescript": "^4.9.5"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "xml-js": "^1.6.11"
+  }
+}
