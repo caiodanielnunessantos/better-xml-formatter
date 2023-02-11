@@ -52,6 +52,8 @@ function formatCollection(elements: XMLJSElement[], indentation: string, maxLine
     } else if (element.text) {
       element.text.split(/\s+/g).filter((word) => word).forEach((word) => wordBucket.push(word));
     } else if (element.tag && element.children) {
+      drainBucket();
+      output += '\n';
       output += formatElement(element, indentation, maxLineWidth);
     }
   });

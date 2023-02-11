@@ -1,4 +1,3 @@
-import { XMLJSElement } from "./xmlobj";
 import { xml2js } from 'xml-js';
 
 const config = {
