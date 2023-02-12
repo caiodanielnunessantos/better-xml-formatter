@@ -19,7 +19,12 @@ function formatSelfClosingTagElementOneLine(element: XMLJSElement): string {
 }
 
 function lengthSelfClosingTagElementOneLine(element: XMLJSElement): number {
-  return formatSelfClosingTagElementOneLine(element).length;
+  return element.tag && element.tag.length || 0
+    + Object
+      .entries(element.attributes || {})
+      .map(([key, value]) => key.length + value.length + 3)
+      .reduce((a, b) => a + b)
+    + 4;
 }
 
 function formatParentTagElementOneLine(element: XMLJSElement): string {
@@ -33,7 +38,15 @@ function formatParentTagElementOneLine(element: XMLJSElement): string {
 }
 
 function lengthParentTagElementOneLine(element: XMLJSElement): number {
-  return formatParentTagElementOneLine(element).length;
+  return (element.tag && element.tag.length || 0) * 2
+    + Object
+      .entries(element.attributes || {})
+      .map(([key, value]) => key.length + value.length + 3)
+      .reduce((a, b) => a + b)
+    + (element.children || [])
+      .map((element) => lengthNodeOneLine(element))
+      .reduce((a, b) => a + b)
+    + 5;
 }
 
 export function formatTagElementOneLine(element: XMLJSElement): string {
@@ -48,7 +61,14 @@ export function formatTagElementOneLine(element: XMLJSElement): string {
 }
 
 export function lengthTagElementOneLine(element: XMLJSElement): number {
-  return formatTagElementOneLine(element).length;
+  if (element.tag) {
+    if (element.children) {
+      return lengthParentTagElementOneLine(element);
+    } else {
+      return lengthSelfClosingTagElementOneLine(element);
+    }
+  }
+  return 0;
 }
 
 function formatElementOneLine(element: XMLJSElement): string {
@@ -61,7 +81,12 @@ function formatElementOneLine(element: XMLJSElement): string {
 }
 
 function lengthElementOneLine(element: XMLJSElement): number {
-  return formatElementOneLine(element).length;
+  if (element.text) {
+    return formatTextOneLine(element).length;
+  } else if (element.tag) {
+    return lengthTagElementOneLine(element);
+  }
+  return 0;
 }
 
 export function formatNodeOneLine(element: XMLJSElement[] | XMLJSElement | null): string {
@@ -76,5 +101,15 @@ export function formatNodeOneLine(element: XMLJSElement[] | XMLJSElement | null)
 }
 
 export function lengthNodeOneLine(element: XMLJSElement): number {
-  return formatNodeOneLine(element).length;
+  if (element) {
+    if (Array.isArray(element)) {
+      return element
+        .map((element) => lengthElementOneLine(element))
+        .reduce((a, b) => a + b);
+    } else {
+      return lengthElementOneLine(element);
+    }
+  } else {
+    return 0;
+  }
 }
