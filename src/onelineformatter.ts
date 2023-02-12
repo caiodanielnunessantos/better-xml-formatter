@@ -23,7 +23,7 @@ function lengthSelfClosingTagElementOneLine(element: XMLJSElement): number {
     + Object
       .entries(element.attributes || {})
       .map(([key, value]) => key.length + value.length + 3)
-      .reduce((a, b) => a + b)
+      .reduce((a, b) => a + b, 0)
     + 4;
 }
 
@@ -42,10 +42,10 @@ function lengthParentTagElementOneLine(element: XMLJSElement): number {
     + Object
       .entries(element.attributes || {})
       .map(([key, value]) => key.length + value.length + 3)
-      .reduce((a, b) => a + b)
+      .reduce((a, b) => a + b, 0)
     + (element.children || [])
       .map((element) => lengthNodeOneLine(element))
-      .reduce((a, b) => a + b)
+      .reduce((a, b) => a + b, 0)
     + 5;
 }
 
@@ -105,7 +105,7 @@ export function lengthNodeOneLine(element: XMLJSElement): number {
     if (Array.isArray(element)) {
       return element
         .map((element) => lengthElementOneLine(element))
-        .reduce((a, b) => a + b);
+        .reduce((a, b) => a + b, 0);
     } else {
       return lengthElementOneLine(element);
     }
