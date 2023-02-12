@@ -1,4 +1,3 @@
-require('./reflowText');
 require('./indentOneLevel');
 require('./onelineformatter');
 require('./tagformatter');
