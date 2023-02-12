@@ -12,11 +12,12 @@
   "types": "dist/src/index.d.ts",
   "scripts": {
     "lint": "eslint . --ext=ts",
+    "precompile": "rm -r ./dist",
     "compile": "tsc",
     "pretest": "npm run compile",
     "test": "node ./dist/tests/index.js",
     "prepare": "npm run compile",
-    "prepublishOnly": "npm test && npm run lint"
+    "prepublishOnly": "npm test && npm run lint && rm -r ./dist/tests"
   },
   "keywords": [
     "xml",
