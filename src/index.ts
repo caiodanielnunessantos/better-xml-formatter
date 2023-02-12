@@ -1,10 +1,16 @@
 import { formatter } from "./recursiveformatter";
 import { getJSONFromXML } from './convert';
 
-export function formatXMLString(input: string, tabSize: number, lineWidth: number): string {
+interface ReturnWithMessage {
+  formatted?: string,
+  message: string,
+}
+
+export function formatXMLString(input: string, tabSize: number, lineWidth: number): ReturnWithMessage {
   try {
-    return formatter(getJSONFromXML(input), ' '.repeat(tabSize), lineWidth);
+    const formatted = formatter(getJSONFromXML(input), ' '.repeat(tabSize), lineWidth);
+    return ({ formatted, message: 'ok' });
   } catch (er) {
-    return input;
+    return ({ message: `${er}` });
   }
 }
